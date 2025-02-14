@@ -1,0 +1,131 @@
+<app-blank pageName="Reçetele" [routers]="['Reçeteler']">
+    <app-section sectionTitle="Reçete Listesi">
+        <div class="form-group row">
+            <div class="col-9">
+                <button class="btn btn-dark" data-toggle="modal" data-target="#createModal">
+                    <i class="fa fa-plus me-1"></i> Reçete Ekle</button>
+            </div>
+            <div class="col-3">
+                <input [(ngModel)]="search" type="search" class="form-control" placeholder="Aranacak Değeri Girin...">
+            </div>
+        </div>
+
+     <div class="form-group mt-2">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover ">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Ürün Adı</th>
+                  <th>İşlemler</th>
+              </tr>
+          </thead>
+          <tbody>
+              @for (recipe of recipes |recipe:search; track recipe) {
+              <tr>
+                  <td>{{$index +1}}</td>
+                  <td>{{recipe.product.name}}</td>
+                  <td>
+                      
+                      <button (click)="deleteById(recipe)" class="btn btn-outline-danger btn-sm me-1">
+                          <i class="fa fa-trash"></i>
+                      </button>
+                  </td>
+              </tr>
+          }
+          </tbody>
+      </table>
+      </div>
+        
+     </div>
+    </app-section>
+</app-blank>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Reçete Ekle Formu</h1>
+          <button type="button" #createModalCloseBtn class="btn btn-outline-danger" data-dismiss="modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <form formValidate #createForm="ngForm" autocomplete="off" (ngSubmit)="create(createForm)">
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Reçete Oluşturulacak Ürün</label>
+                <select name="productId" [(ngModel)]="createModel.productId" class="form-control" required>
+                    @for (product of products; track product) {
+                        <option [value]="product.id"> ({{product.type.name}}) {{product.name}}</option>
+                    }
+                </select>
+                <div class="invalid-feedback"></div>
+              </div>
+              
+            <hr>
+             <div class="form-group mt-2">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Yarı Mamül</label>
+                            <!--yukarıdaki form ile bağlantıyı koparmak adını standalone kullandık-->
+                            <select name="detailProductId" [(ngModel)]="detail.productId" class="form-control" [ngModelOptions]="{standalone: true}">
+                                @for (product of semiProducts; track product) {
+                                    <option [value]="product.id">{{product.name}}</option>
+                                }
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>Adet</label>
+                            <input name="detailProductId" [(ngModel)]="detail.quantity" class="form-control" [ngModelOptions]="{standalone: true}">
+                          </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>İşlemler</label>
+                            <br>
+                            <button type="button" class="btn btn-outline-dark" (click)="addDetail()">Ekle</button>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ürün Adı</th>
+                                <th>Adedi</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (detail of createModel.details; track detail) {
+                            <tr>
+                                <td>{{$index +1}}</td>
+                                <td>{{detail.product.name}}</td>
+                                <td>{{detail.quantity}}</td>
+                                <td>
+                                    <button (click)="removeDetail($index)" type="button" class="btn btn-outline-danger btn-sm">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+              
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-dark w-100">Kaydet</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+

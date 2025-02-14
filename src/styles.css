@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+.me-2{
+    margin-right: 0.5rem !important;
+}
+
+.me-1{
+    margin-right: 0.25rem !important;
+}
