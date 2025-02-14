@@ -57,7 +57,7 @@
                 <label>Reçete Oluşturulacak Ürün</label>
                 <select name="productId" [(ngModel)]="createModel.productId" class="form-control" required>
                     @for (product of products; track product) {
-                        <option [value]="product.id"> ({{product.type.name}}) {{product.name}}</option>
+                        <option [value]="product.id"> {{product.name}} <span>({{product.type.name}})</span></option>
                     }
                 </select>
                 <div class="invalid-feedback"></div>
