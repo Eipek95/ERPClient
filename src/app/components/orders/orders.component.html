@@ -34,6 +34,10 @@
                   <td>{{order.deliveryDate  | date:'dd-MM-yyyy'}}</td>
                   <td>{{order.status.name}}</td>
                   <td>
+                    <a class="btn btn-outline-dark me-1" href="requirements-planning/{{order.id}}" target="_blank" (click)="getAll()">
+                        <i class="fa fa-list"></i>
+                        İhtiyaç Planlaması Çalıştır
+                    </a>
                       <button class="btn btn-outline-primary btn-sm me-1" data-toggle="modal" data-target="#updateModal" (click)="get(order)">
                           <i class="fa fa-edit"></i>
                       </button>
