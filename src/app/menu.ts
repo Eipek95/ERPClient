@@ -59,6 +59,28 @@ export const Menus: MenuModel[] = [
     subMenus: [],
   },
   {
+    name: 'Faturalar',
+    icon: 'fas fa-solid fa-file-invoice',
+    url: '/invoices',
+    isTitle: false,
+    subMenus: [
+      {
+        name: 'Alış Faturaları',
+        icon: 'fas fa-solid fa-clipboard-list',
+        url: '/invoices/purchase',
+        isTitle: false,
+        subMenus: [],
+      },
+      {
+        name: 'Satış Faturaları',
+        icon: 'fas fa-solid fa-clipboard-list',
+        url: '/invoices/selling',
+        isTitle: false,
+        subMenus: [],
+      },
+    ],
+  },
+  {
     name: 'Font Awesome',
     icon: 'fab fa-fonticons-fi',
     url: 'https://fontawesome.com/v5/icons/fonticons-fi?f=brands&s=solid',
