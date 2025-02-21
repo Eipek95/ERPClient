@@ -79,7 +79,13 @@ export const Menus: MenuModel[] = [
         subMenus: [],
       },
     ],
-  },
+  },{
+    name: "Üretim",
+    icon: "fas fa-solid fa-wrench",
+    url: "/productions",
+    isTitle: false,
+    subMenus: []
+},
   {
     name: 'Font Awesome',
     icon: 'fab fa-fonticons-fi',
